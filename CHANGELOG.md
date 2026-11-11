@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.0-rc.2](https://github.com/usespotlightai/terraform-spotlight-sentry/compare/v0.1.0-rc.1...v0.1.0-rc.2) (2026-11-11)
+
+
+### Features
+
+* send the Sentry mark as the integration's logo ([#2](https://github.com/usespotlightai/terraform-spotlight-sentry/issues/2)) ([f588967](https://github.com/usespotlightai/terraform-spotlight-sentry/commit/f588967c333995a4a54997bd2db154a356defe8f))
+
 ## [0.1.0-rc.1](https://github.com/usespotlightai/terraform-spotlight-sentry/compare/v0.1.0-rc.0...v0.1.0-rc.1) (2026-11-10)
 
 
