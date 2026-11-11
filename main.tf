@@ -12,6 +12,8 @@ data "spotlight_team" "this" {
 }
 
 locals {
+  logo = coalesce(var.logo, "data:image/svg+xml;base64,${filebase64("${path.module}/logo.svg")}")
+
   client_secret_name = try(spotlight_secret.client[0].name, var.client_secret_name)
   auth_token_name    = try(spotlight_secret.auth_token[0].name, var.auth_token_name)
 
@@ -130,6 +132,7 @@ resource "spotlight_integration" "this" {
   definition = {
     integration = var.integration
     name        = var.name
+    logo        = local.logo
 
     webhook = {
       verify = {
