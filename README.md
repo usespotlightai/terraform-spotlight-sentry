@@ -75,7 +75,9 @@ Each task keeps three marks: `sentry.issue`, the issue's ID, which finds the tas
 
 ### Read an issue from an agent
 
-The integration gives agents two tools, `get-issue` and `get-latest-event`. Both take the issue's ID or short ID. `get-latest-event` returns the latest event with its stack trace, breadcrumbs and tags. Enable them on a station through the `tools` output, so a plan fails if a tool is renamed or removed:
+The integration gives agents two tools, `get-issue` and `get-latest-event`. `get-latest-event` returns the latest event with its stack trace, breadcrumbs and tags. Each run on a task with a `sentry.issue` mark has both tools, at every station, so an agent can follow up on the alert that opened its task. Both take the issue's ID or short ID, and without it read the task's issue.
+
+To give the tools to a station for tasks without the mark, enable them through the `tools` output, so a plan fails if a tool is renamed or removed:
 
 ```hcl
 tools = [module.sentry.tools["get-latest-event"]]
