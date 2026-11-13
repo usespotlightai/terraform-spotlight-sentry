@@ -111,6 +111,16 @@ run "reads_issues_with_the_auth_token" {
     condition     = keys(spotlight_integration.this[0].definition.tools) == ["get-issue", "get-latest-event"]
     error_message = "Agents get the two read tools."
   }
+
+  assert {
+    condition     = alltrue([for each in values(spotlight_integration.this[0].definition.tools) : each.enabledOnMark == "sentry.issue"])
+    error_message = "Each run on a task with the issue's mark has the tools."
+  }
+
+  assert {
+    condition     = alltrue([for each in values(spotlight_integration.this[0].definition.tools) : !contains(keys(each.inputs.issue), "required") && strcontains(each.inputs.issue.default, "task.marks[\"sentry.issue\"]")])
+    error_message = "Without an issue, the tools read the task's issue."
+  }
 }
 
 run "leaves_the_issue_when_a_task_finishes_by_default" {
@@ -188,6 +198,11 @@ run "names_everything_after_the_integration" {
   assert {
     condition     = output.webhook_url == "https://app.usespotlight.ai/api/webhooks/w/acme/t/core/errors"
     error_message = "The webhook address ends with the integration's name."
+  }
+
+  assert {
+    condition     = spotlight_integration.this[0].definition.tools["get-issue"].enabledOnMark == "errors.issue" && strcontains(spotlight_integration.this[0].definition.tools["get-issue"].inputs.issue.default, "task.marks[\"errors.issue\"]")
+    error_message = "The tools are enabled on the integration's own issue mark."
   }
 }
 

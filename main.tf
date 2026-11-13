@@ -98,7 +98,11 @@ locals {
   }
 
   issue_input = {
-    issue = { type = "string", required = true, description = "The ID or short ID of the Sentry issue, as in 4507182346 or FRONTEND-3K." }
+    issue = {
+      type        = "string"
+      description = "The ID or short ID of the Sentry issue, as in 4507182346 or FRONTEND-3K. Without it, the task's issue."
+      default     = "$${{ \"${local.issue_mark}\" in task.marks ? task.marks[\"${local.issue_mark}\"] : \"\" }}"
+    }
   }
 
   checked_issue = "$${{ inputs.issue.matches(\"^[A-Za-z0-9-]+$\") ? inputs.issue : \"-\" }}"
@@ -197,16 +201,18 @@ resource "spotlight_integration" "this" {
 
     tools = {
       get-issue = {
-        action      = "get-issue"
-        description = "Read a Sentry issue: its title, status, level, culprit, counts and first and last seen times."
-        inputs      = local.issue_input
-        output      = "$${{ response }}"
+        action        = "get-issue"
+        description   = "Read a Sentry issue: its title, status, level, culprit, counts and first and last seen times."
+        inputs        = local.issue_input
+        output        = "$${{ response }}"
+        enabledOnMark = local.issue_mark
       }
       get-latest-event = {
-        action      = "get-latest-event"
-        description = "Read the latest event of a Sentry issue, with its stack trace, breadcrumbs, tags and request. Use it to find where an error comes from."
-        inputs      = local.issue_input
-        output      = "$${{ response }}"
+        action        = "get-latest-event"
+        description   = "Read the latest event of a Sentry issue, with its stack trace, breadcrumbs, tags and request. Use it to find where an error comes from."
+        inputs        = local.issue_input
+        output        = "$${{ response }}"
+        enabledOnMark = local.issue_mark
       }
     }
 
