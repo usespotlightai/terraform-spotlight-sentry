@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.0-rc.3](https://github.com/usespotlightai/terraform-spotlight-sentry/compare/v0.1.0-rc.2...v0.1.0-rc.3) (2026-11-13)
+
+
+### Features
+
+* give the issue tools to every run on a task with a Sentry issue ([#4](https://github.com/usespotlightai/terraform-spotlight-sentry/issues/4)) ([340955c](https://github.com/usespotlightai/terraform-spotlight-sentry/commit/340955c5835522854192d7ef8733c58987e175fb))
+
 ## [0.1.0-rc.2](https://github.com/usespotlightai/terraform-spotlight-sentry/compare/v0.1.0-rc.1...v0.1.0-rc.2) (2026-11-11)
 
 
