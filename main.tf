@@ -205,6 +205,7 @@ resource "spotlight_integration" "this" {
         description   = "Read a Sentry issue: its title, status, level, culprit, counts and first and last seen times."
         inputs        = local.issue_input
         output        = "$${{ response }}"
+        readOnly      = true
         enabledOnMark = local.issue_mark
       }
       get-latest-event = {
@@ -212,6 +213,7 @@ resource "spotlight_integration" "this" {
         description   = "Read the latest event of a Sentry issue, with its stack trace, breadcrumbs, tags and request. Use it to find where an error comes from."
         inputs        = local.issue_input
         output        = "$${{ response }}"
+        readOnly      = true
         enabledOnMark = local.issue_mark
       }
     }
