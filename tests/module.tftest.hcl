@@ -118,6 +118,11 @@ run "reads_issues_with_the_auth_token" {
   }
 
   assert {
+    condition     = alltrue([for each in values(spotlight_integration.this[0].definition.tools) : each.readOnly])
+    error_message = "The tools only read, so a replay can call them."
+  }
+
+  assert {
     condition     = alltrue([for each in values(spotlight_integration.this[0].definition.tools) : !contains(keys(each.inputs.issue), "required") && strcontains(each.inputs.issue.default, "task.marks[\"sentry.issue\"]")])
     error_message = "Without an issue, the tools read the task's issue."
   }
