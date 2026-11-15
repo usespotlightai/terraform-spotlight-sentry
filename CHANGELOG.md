@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.0-rc.4](https://github.com/usespotlightai/terraform-spotlight-sentry/compare/v0.1.0-rc.3...v0.1.0-rc.4) (2026-11-15)
+
+
+### Features
+
+* mark the issue tools read-only, so a replay can call them ([#6](https://github.com/usespotlightai/terraform-spotlight-sentry/issues/6)) ([cad2b03](https://github.com/usespotlightai/terraform-spotlight-sentry/commit/cad2b032345261ed812a1a64a0c15fd22361fbb1))
+
 ## [0.1.0-rc.3](https://github.com/usespotlightai/terraform-spotlight-sentry/compare/v0.1.0-rc.2...v0.1.0-rc.3) (2026-11-13)
 
 
